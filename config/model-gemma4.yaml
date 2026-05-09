@@ -1,0 +1,6 @@
+model:
+  name: "gemma4"
+  provider: "placeholder"
+  notes: |
+    Gemma4 is installed on this system as a snap.
+    Wire this config to the actual runtime (local or cloud) you choose.
