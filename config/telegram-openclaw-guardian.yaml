@@ -1,0 +1,11 @@
+telegram:
+  enabled: true
+  bot_token: "8709399630:AAG4o6fmqbQaMK816KW0-_PumJ-7H_qoxWQ"
+  chat:
+    id: 7914572177
+    first_name: "Great"
+    last_name: "Hanuman"
+    language_code: "en"
+  notes: |
+    This bot is used by OpenClawGuardian to send and receive messages.
+    Replace bot_token with the real token from BotFather.
