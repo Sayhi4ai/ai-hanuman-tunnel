@@ -149,3 +149,18 @@ ollama/
 ollama.log
 huggingface/
 huggingface_cache/
+
+
+# UNIGNORE SOURCE CODE FOLDERS
+!openclaw-backend/
+!openclaw-backend/app/
+!openclaw_guardian/
+!openclaw_guardian/src/
+!agent-runtime/
+!agent-runtime/src/
+!openclaw-ops-captain/
+!openclaw-ops-captain/src/
+!openclaw-runtime/
+!openclaw-runtime/src/
+!ai-hanuman-tunnel/
+!ai-hanuman-tunnel/src/
