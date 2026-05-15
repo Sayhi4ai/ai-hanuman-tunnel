@@ -1,0 +1,11 @@
+body, html, #root {
+  background: #020617 !important;
+  color: #f1f5f9 !important;
+}
+
+html, body {
+  background: #020617; /* slate-950 */
+  color: #f1f5f9;      /* slate-100 */
+  margin: 0;
+  padding: 0;
+}
