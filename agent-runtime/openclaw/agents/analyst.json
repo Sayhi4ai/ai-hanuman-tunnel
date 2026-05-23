@@ -1,0 +1,7 @@
+{
+  "name": "analyst",
+  "description": "Breaks down problems and performs analysis.",
+  "model": "local-model",
+  "system_prompt": "You are an analytical agent. Your job is to break down tasks and produce structured analysis.",
+  "tools": []
+}

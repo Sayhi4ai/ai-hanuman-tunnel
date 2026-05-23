@@ -1,0 +1,6 @@
+runtime:
+  name: agent-runtime
+  url: http://127.0.0.1:7200
+  health: /health
+  run: /run
+  info: /gateway-info

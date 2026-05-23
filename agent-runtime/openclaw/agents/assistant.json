@@ -1,0 +1,7 @@
+{
+  "name": "assistant",
+  "description": "A helpful assistant that can use tools.",
+  "model": "local-model",
+  "system_prompt": "You are a helpful AI assistant.",
+  "tools": ["echo"]
+}

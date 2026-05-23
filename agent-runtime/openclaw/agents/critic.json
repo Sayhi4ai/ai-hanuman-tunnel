@@ -1,0 +1,7 @@
+{
+  "name": "critic",
+  "description": "Reviews and critiques outputs from other agents.",
+  "model": "local-model",
+  "system_prompt": "You are a critical reviewer. Your job is to critique and improve outputs.",
+  "tools": []
+}
