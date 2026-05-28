@@ -1,22 +1,23 @@
+from openclaw import memory
+
 class Planner:
     def plan(self, goal: str, stage: str):
         if stage == "none":
             return ["Analyze the goal"]
 
         if stage == "analysis_complete":
-            return ["Write a draft response"]
+            return ["Draft a response"]
 
         if stage == "draft_complete":
-            return ["Critique the draft"]
+            return ["Reflect on the draft"]
 
-        if stage == "critique_complete":
+        if stage == "reflection_complete":
+            return ["Improve the draft"]
+
+        if stage == "improvement_complete":
             return ["Finalize the result"]
-        if stage == "analysis_complete":
-            return [
-                "tool:web_fetch(url='https://example.com')",
-                "Write a draft response"
-            ]
 
-        return ["Continue working toward the goal"]
+        # final or unknown → stop
+        return []
 
 planner = Planner()

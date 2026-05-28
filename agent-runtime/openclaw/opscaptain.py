@@ -68,9 +68,15 @@ class OpsCaptain:
         if "draft" in last:
             return "draft_complete"
 
-        if "critique" in last:
-            return "critique_complete"
+        if "reflection" in last:
+            return "reflection_complete"
 
-            return "unknown"
+        if "improved" in last:
+            return "improvement_complete"
+
+        if "final" in last:
+            return "final_complete"
+
+        return "unknown"
 
 opscaptain = OpsCaptain()

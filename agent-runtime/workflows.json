@@ -1,0 +1,1 @@
+{"research_basic":[{"agent":"websearcher","task":"{input}"},{"agent":"writer","task":"Summarize: {input}"}]}

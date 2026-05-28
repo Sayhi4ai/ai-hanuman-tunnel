@@ -13,24 +13,34 @@ class AutoRun(BaseModel):
 def auto_run(req: AutoRun):
     session_id = opscaptain.start_task(req.goal)
 
-    while True:
+    prev = ""
+    max_iterations = 20
+    count = 0
+
+    while count < max_iterations:
+        count += 1
+
         stage = opscaptain.detect_stage(session_id)
         steps = planner.plan(req.goal, stage)
 
-        # If no more steps, break
         if not steps:
             break
 
         for step in steps:
             routed = opscaptain.route_step(session_id, step)
-            result = executor.run_step(routed["agent"], routed["instruction"])
+            result = executor.run_step(
+                routed["agent"],
+                routed["instruction"],
+                previous_output=prev
+            )
             opscaptain.record_result(session_id, result)
+            prev = result
 
-        # Stop when final result is complete
-        if "final" in opscaptain.sessions[session_id]["results"][-1].lower():
+        if "final" in prev.lower():
             break
 
     return {
         "session_id": session_id,
-        "results": opscaptain.sessions[session_id]["results"]
+        "results": opscaptain.sessions[session_id]["results"],
+        "iterations": count
     }
