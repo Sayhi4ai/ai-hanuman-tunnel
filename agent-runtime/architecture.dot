@@ -1,0 +1,100 @@
+digraph Architecture {
+
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor="#222222", fontcolor="white"];
+
+  subgraph cluster_core {
+    label="Core Runtime";
+    task_queue;
+    graph;
+    vector_memory;
+    load_balancer;
+    messaging;
+    logger;
+  }
+
+  subgraph cluster_engines {
+    label="Engines";
+    chaos_engine;
+    diplomacy_engine;
+    ethics_engine;
+    evolution_engine;
+    federation_manager;
+    genetic_engine;
+    loop_engine;
+    long_term_planner;
+    policy_engine;
+    security_scanner;
+    swarm_manager;
+    threat_detector;
+  }
+
+  subgraph cluster_agents {
+    label="Agents";
+    planner_agent;
+    writer_agent;
+    reasoning_agent;
+    swarm_agent;
+    genetic_agent;
+    governance_agent;
+    ethics_agent;
+    threat_agent;
+    security_agent;
+    chaos_agent;
+    distributed_agent;
+    mesh_agent;
+    federation_agent;
+    diplomacy_agent;
+    optimization_agent;
+    memory_compression_agent;
+    registry_healer_agent;
+  }
+
+  subgraph cluster_distributed {
+    label="Distributed Layer";
+    cluster_manager;
+    cluster_node;
+    mesh_network;
+    federation_protocol;
+  }
+
+  subgraph cluster_openclaw {
+    label="OpenClaw";
+    oc_executor;
+    oc_planner;
+    oc_guardian;
+    oc_memory;
+    oc_reflection;
+    oc_tool_registry;
+  }
+
+  task_queue -> load_balancer;
+  load_balancer -> graph;
+  load_balancer -> planner_agent;
+  load_balancer -> writer_agent;
+  load_balancer -> reasoning_agent;
+
+  planner_agent -> swarm_agent;
+  reasoning_agent -> swarm_agent;
+  swarm_agent -> genetic_agent;
+
+  planner_agent -> governance_agent;
+  writer_agent -> governance_agent;
+  reasoning_agent -> governance_agent;
+
+  governance_agent -> ethics_agent;
+  governance_agent -> threat_agent;
+  threat_agent -> security_agent;
+
+  planner_agent -> distributed_agent;
+  writer_agent -> distributed_agent;
+  reasoning_agent -> distributed_agent;
+
+  distributed_agent -> mesh_agent;
+  mesh_agent -> federation_agent;
+  federation_agent -> diplomacy_agent;
+
+  vector_memory -> planner_agent;
+  vector_memory -> writer_agent;
+  vector_memory -> reasoning_agent;
+}

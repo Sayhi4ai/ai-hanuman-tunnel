@@ -1,0 +1,77 @@
+flowchart TD
+
+  subgraph Core["Core Runtime"]
+    task_queue["task_queue.py"]
+    load_balancer["load_balancer.py"]
+    registry["graph.py (AGENT_REGISTRY)"]
+    memory["vector_memory.py"]
+    messaging["messaging.py"]
+  end
+
+  subgraph CoreAgents["Core Agents"]
+    planner["agents/planner.py"]
+    writer["agents/backup_writer.py"]
+    reasoner["agents/reasoning_agent.py"]
+  end
+
+  subgraph SwarmEvolution["Swarm + Evolution"]
+    swarm["agents/swarm_agent.py"]
+    genetic["agents/genetic_agent.py"]
+    evolution_engine["evolution_engine.py"]
+    swarm_manager["swarm_manager.py"]
+  end
+
+  subgraph Governance["Governance + Safety"]
+    governance["agents/governance_agent.py"]
+    ethics["agents/ethics_agent.py"]
+    threat["agents/threat_agent.py"]
+    security["agents/security_agent.py"]
+    policy_engine["policy_engine.py"]
+    threat_detector["threat_detector.py"]
+    security_scanner["security_scanner.py"]
+  end
+
+  subgraph Distributed["Distributed + Mesh"]
+    distributed["agents/distributed_agent.py"]
+    mesh["agents/mesh_agent.py"]
+    mesh_network["mesh_network.py"]
+    cluster_manager["cluster_manager.py"]
+    cluster_node["cluster_node.py"]
+  end
+
+  subgraph Federation["Federation + Diplomacy"]
+    federation["agents/federation_agent.py"]
+    federation_manager["federation_manager.py"]
+    diplomacy["agents/diplomacy_agent.py"]
+    diplomacy_engine["diplomacy_engine.py"]
+  end
+
+  task_queue --> load_balancer
+  load_balancer --> registry
+  load_balancer --> planner
+  load_balancer --> writer
+  load_balancer --> reasoner
+
+  planner --> swarm
+  reasoner --> swarm
+  swarm --> genetic
+
+  planner --> governance
+  writer --> governance
+  reasoner --> governance
+
+  governance --> ethics
+  governance --> threat
+  threat --> security
+
+  planner --> distributed
+  writer --> distributed
+  reasoner --> distributed
+
+  distributed --> mesh
+  mesh --> federation
+  federation --> diplomacy
+
+  memory --> planner
+  memory --> writer
+  memory --> reasoner

@@ -1,0 +1,93 @@
+@startuml
+
+package "Core Runtime" {
+  class task_queue
+  class graph
+  class vector_memory
+  class load_balancer
+  class messaging
+  class logger
+}
+
+package "Engines" {
+  class chaos_engine
+  class diplomacy_engine
+  class ethics_engine
+  class evolution_engine
+  class federation_manager
+  class genetic_engine
+  class loop_engine
+  class long_term_planner
+  class policy_engine
+  class security_scanner
+  class swarm_manager
+  class threat_detector
+}
+
+package "Agents" {
+  class planner_agent
+  class writer_agent
+  class reasoning_agent
+  class swarm_agent
+  class genetic_agent
+  class governance_agent
+  class ethics_agent
+  class threat_agent
+  class security_agent
+  class chaos_agent
+  class distributed_agent
+  class mesh_agent
+  class federation_agent
+  class diplomacy_agent
+  class optimization_agent
+  class memory_compression_agent
+  class registry_healer_agent
+}
+
+package "Distributed" {
+  class cluster_manager
+  class cluster_node
+  class mesh_network
+  class federation_protocol
+}
+
+package "OpenClaw" {
+  class oc_executor
+  class oc_planner
+  class oc_guardian
+  class oc_memory
+  class oc_reflection
+  class oc_tool_registry
+}
+
+task_queue --> load_balancer
+load_balancer --> graph
+load_balancer --> planner_agent
+load_balancer --> writer_agent
+load_balancer --> reasoning_agent
+
+planner_agent --> swarm_agent
+reasoning_agent --> swarm_agent
+swarm_agent --> genetic_agent
+
+planner_agent --> governance_agent
+writer_agent --> governance_agent
+reasoning_agent --> governance_agent
+
+governance_agent --> ethics_agent
+governance_agent --> threat_agent
+threat_agent --> security_agent
+
+planner_agent --> distributed_agent
+writer_agent --> distributed_agent
+reasoning_agent --> distributed_agent
+
+distributed_agent --> mesh_agent
+mesh_agent --> federation_agent
+federation_agent --> diplomacy_agent
+
+vector_memory --> planner_agent
+vector_memory --> writer_agent
+vector_memory --> reasoning_agent
+
+@enduml

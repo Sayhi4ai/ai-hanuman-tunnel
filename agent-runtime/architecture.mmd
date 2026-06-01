@@ -1,0 +1,91 @@
+flowchart TD
+
+  subgraph Core["Core Runtime Layer"]
+    task_queue["task_queue.py"]
+    registry["graph.py (AGENT_REGISTRY)"]
+    memory["vector_memory.py"]
+    loadbal["load_balancer.py"]
+    messaging["messaging.py"]
+    logger["logger.py"]
+  end
+
+  subgraph Engines["Engine Layer"]
+    chaos_engine["chaos_engine.py"]
+    diplomacy_engine["diplomacy_engine.py"]
+    ethics_engine["ethics_engine.py"]
+    evolution_engine["evolution_engine.py"]
+    federation_manager["federation_manager.py"]
+    genetic_engine["genetic_engine.py"]
+    loop_engine["loop_engine.py"]
+    long_term_planner["long_term_planner.py"]
+    policy_engine["policy_engine.py"]
+    security_scanner["security_scanner.py"]
+    swarm_manager["swarm_manager.py"]
+    threat_detector["threat_detector.py"]
+  end
+
+  subgraph Agents["Agent Layer"]
+    planner["agents/planner.py"]
+    writer["agents/backup_writer.py"]
+    reasoner["agents/reasoning_agent.py"]
+    swarm["agents/swarm_agent.py"]
+    genetic["agents/genetic_agent.py"]
+    governance["agents/governance_agent.py"]
+    ethics["agents/ethics_agent.py"]
+    threat["agents/threat_agent.py"]
+    security["agents/security_agent.py"]
+    chaos["agents/chaos_agent.py"]
+    distributed["agents/distributed_agent.py"]
+    mesh["agents/mesh_agent.py"]
+    federation["agents/federation_agent.py"]
+    diplomacy["agents/diplomacy_agent.py"]
+    optimizer["agents/optimization_agent.py"]
+    memory_compress["agents/memory_compression_agent.py"]
+    registry_healer["agents/registry_healer_agent.py"]
+  end
+
+  subgraph Distributed["Distributed Layer"]
+    cluster_manager["cluster_manager.py"]
+    cluster_node["cluster_node.py"]
+    mesh_network["mesh_network.py"]
+    federation_protocol["federation_protocol.py"]
+  end
+
+  subgraph OpenClaw["OpenClaw Layer"]
+    oc_executor["openclaw/executor.py"]
+    oc_planner["openclaw/planner.py"]
+    oc_guardian["openclaw/guardian.py"]
+    oc_memory["openclaw/memory.py"]
+    oc_reflection["openclaw/reflection.py"]
+    oc_tool_registry["openclaw/tool_registry.py"]
+  end
+
+  task_queue --> loadbal
+  loadbal --> registry
+  loadbal --> planner
+  loadbal --> writer
+  loadbal --> reasoner
+
+  planner --> swarm
+  reasoner --> swarm
+  swarm --> genetic
+
+  planner --> governance
+  writer --> governance
+  reasoner --> governance
+
+  governance --> ethics
+  governance --> threat
+  threat --> security
+
+  planner --> distributed
+  writer --> distributed
+  reasoner --> distributed
+
+  distributed --> mesh
+  mesh --> federation
+  federation --> diplomacy
+
+  memory --> planner
+  memory --> writer
+  memory --> reasoner

@@ -1,0 +1,87 @@
+digraph AgentDependencies {
+
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor="#222222", fontcolor="white"];
+
+  subgraph cluster_core {
+    label="Core Runtime";
+    task_queue;
+    load_balancer;
+    graph;
+    vector_memory;
+    messaging;
+  }
+
+  subgraph cluster_core_agents {
+    label="Core Agents";
+    planner;
+    writer;
+    reasoner;
+  }
+
+  subgraph cluster_swarm {
+    label="Swarm + Evolution";
+    swarm_agent;
+    genetic_agent;
+    evolution_engine;
+    swarm_manager;
+  }
+
+  subgraph cluster_governance {
+    label="Governance + Safety";
+    governance_agent;
+    ethics_agent;
+    threat_agent;
+    security_agent;
+    policy_engine;
+    threat_detector;
+    security_scanner;
+  }
+
+  subgraph cluster_distributed {
+    label="Distributed + Mesh";
+    distributed_agent;
+    mesh_agent;
+    mesh_network;
+    cluster_manager;
+    cluster_node;
+  }
+
+  subgraph cluster_federation {
+    label="Federation + Diplomacy";
+    federation_agent;
+    federation_manager;
+    diplomacy_agent;
+    diplomacy_engine;
+  }
+
+  task_queue -> load_balancer;
+  load_balancer -> graph;
+  load_balancer -> planner;
+  load_balancer -> writer;
+  load_balancer -> reasoner;
+
+  planner -> swarm_agent;
+  reasoner -> swarm_agent;
+  swarm_agent -> genetic_agent;
+
+  planner -> governance_agent;
+  writer -> governance_agent;
+  reasoner -> governance_agent;
+
+  governance_agent -> ethics_agent;
+  governance_agent -> threat_agent;
+  threat_agent -> security_agent;
+
+  planner -> distributed_agent;
+  writer -> distributed_agent;
+  reasoner -> distributed_agent;
+
+  distributed_agent -> mesh_agent;
+  mesh_agent -> federation_agent;
+  federation_agent -> diplomacy_agent;
+
+  vector_memory -> planner;
+  vector_memory -> writer;
+  vector_memory -> reasoner;
+}

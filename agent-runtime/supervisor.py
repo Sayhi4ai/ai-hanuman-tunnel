@@ -1,6 +1,7 @@
 import sys
 sys.path.insert(0, "/home/inteligent-human/ai-bots/agent-runtime")
 
+from runtime_api import get_runtime_state
 import logger
 from logger import log
 
@@ -63,6 +64,9 @@ def main():
     time.sleep(STARTUP_GRACE_PERIOD)
 
     while True:
+        state = get_runtime_state()
+        if state.get("turbo_mode"):
+            print("⚠️ WARNING: System is running in TURBO MODE (reduced agents + reduced safety)")
         if proc is None or proc.poll() is not None:
             log("process not running, restarting...")
             stop_process(proc)

@@ -1,6 +1,11 @@
 from graph import AGENT_REGISTRY
+from runtime_api import get_runtime_state
 
 def planner_agent(state):
+    state_info = get_runtime_state()
+    if state_info.get("turbo_mode"):
+        print("Turbo Mode: Planner running in lightweight mode")
+
     task = state.get("task", "").lower()
 
     # Decide which agent to call
@@ -37,6 +42,10 @@ def planner_agent(state):
     state["result"] = result_state["result"]
     state["history"].append(f"PLANNER: delegated to {chosen}")
     state["history"].extend(result_state["history"])
+
+    if state_info.get("turbo_mode"):
+        with open("turbo.log", "a") as f:
+            f.write("Planner executed in Turbo Mode\n")
 
     return state
 
