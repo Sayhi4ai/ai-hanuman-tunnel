@@ -1,0 +1,39 @@
+name: Semantic Versioning
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  semver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Determine bump type
+        id: bump
+        run: |
+          if git log -1 --pretty=%B | grep -qiE "BREAKING CHANGE|major:"; then
+            echo "type=major" >> $GITHUB_OUTPUT
+          elif git log -1 --pretty=%B | grep -qiE "feat|minor:"; then
+            echo "type=minor" >> $GITHUB_OUTPUT
+          else
+            echo "type=patch" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bump version
+        run: |
+          chmod +x scripts/bump-version.sh
+          ./scripts/bump-version.sh ${{ steps.bump.outputs.type }}
+
+      - name: Push changes
+        run: |
+          git push origin main --follow-tags
