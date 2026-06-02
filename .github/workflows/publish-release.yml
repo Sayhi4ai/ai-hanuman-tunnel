@@ -1,0 +1,34 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read release notes from CHANGELOG.md
+        id: notes
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          NOTES=$(awk "/^# $TAG/{flag=1;next}/^# /{flag=0}flag" CHANGELOG.md)
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: ${{ steps.notes.outputs.notes }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
