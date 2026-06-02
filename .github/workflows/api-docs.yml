@@ -1,0 +1,35 @@
+name: Auto API Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Start FastAPI runtime
+        run: |
+          pip install -r requirements.txt
+          nohup python agent-runtime/runtime_api.py &
+          sleep 5
+
+      - name: Generate API Docs
+        run: |
+          pip install requests
+          python scripts/generate-api-docs.py
+
+      - name: Commit docs
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add API_DOCS.md
+          git commit -m "update API docs" || echo "No changes"
+          git push

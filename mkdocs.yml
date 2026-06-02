@@ -1,0 +1,7 @@
+site_name: AI Bots Documentation
+theme:
+  name: material
+
+nav:
+  - Home: README.md
+  - API: API_DOCS.md
